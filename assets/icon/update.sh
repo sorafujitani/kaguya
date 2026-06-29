@@ -21,7 +21,3 @@ png2icns ../macos/WezTerm.app/Contents/Resources/terminal.icns icon_*px.png
 
 # Clean up
 rm -f icon_*px.png
-
-# The Windows icon
-convert $conv_opts -define icon:auto-resize=256,128,96,64,48,32,16 $src ../windows/terminal.ico
-

@@ -44,12 +44,6 @@ TRIGGER_PATHS_MAC = [
     "ci/tag-name.sh",
 ]
 
-TRIGGER_PATHS_WIN = [
-    "assets/windows/**/*",
-    "ci/windows-installer.iss",
-]
-
-
 def yv(v, depth=0):
     if v is True:
         return "true"
@@ -726,40 +720,7 @@ rustup default {toolchain}
         ]
 
     def create_winget_pr(self):
-        steps = []
-        if "windows" in self.name:
-            steps += [
-                ActionStep(
-                    "Checkout winget-pkgs",
-                    action="actions/checkout@v5",
-                    params={
-                        "repository": "wez/winget-pkgs",
-                        "path": "winget-pkgs",
-                        "token": "${{ secrets.GH_PAT }}",
-                    },
-                ),
-                RunStep(
-                    "Setup email for winget repo",
-                    "cd winget-pkgs && git config user.email wez@wezfurlong.org",
-                ),
-                RunStep(
-                    "Setup name for winget repo",
-                    "cd winget-pkgs && git config user.name 'Wez Furlong'",
-                ),
-                RunStep(
-                    "Create winget manifest and push to fork",
-                    "bash ci/make-winget-pr.sh winget-pkgs WezTerm-*.exe",
-                ),
-                RunStep(
-                    "Submit PR",
-                    'cd winget-pkgs && gh pr create --fill --body "PR automatically created by release automation in the wezterm repo"',
-                    env={
-                        "GITHUB_TOKEN": "${{ secrets.GH_PAT }}",
-                    },
-                ),
-            ]
-
-        return steps
+        return []
 
     def update_homebrew_tap(self):
         steps = []
@@ -1002,22 +963,14 @@ rustup default {toolchain}
 
 
 TARGETS = [
-    Target(container="ubuntu:22.04", continuous_only=True),
-    Target(container="ubuntu:24.04", continuous_only=True),
-    Target(container="debian:12", continuous_only=True),
-    Target(name="centos9", container="quay.io/centos/centos:stream9"),
     Target(name="macos", os="macos-latest"),
-    # https://fedoraproject.org/wiki/End_of_life?rd=LifeCycle/EOL
-    Target(container="fedora:41"),
-    # Target(container="alpine:3.15"),
-
-    Target(name="windows", os="windows-2025", rust_target="x86_64-pc-windows-msvc"),
 ]
 
 
 def generate_actions(namer, jobber, trigger, is_continuous, is_tag=False):
     have_gemfury = False
     have_appimage = False
+    needs_linux_release_targets = any(t.container for t in TARGETS)
     for t in TARGETS:
         # Clone the definition, as some Target methods called
         # in the body below have side effects that we don't
@@ -1048,9 +1001,7 @@ def generate_actions(namer, jobber, trigger, is_continuous, is_tag=False):
 
         trigger_paths = [file_name]
         trigger_paths += TRIGGER_PATHS
-        if "win" in name:
-            trigger_paths += TRIGGER_PATHS_WIN
-        elif "macos" in name:
+        if "macos" in name:
             trigger_paths += TRIGGER_PATHS_MAC
         else:
             trigger_paths += TRIGGER_PATHS_UNIX
@@ -1102,9 +1053,9 @@ jobs:
                 yaml.safe_load(f)
         except ImportError:
             pass
-    if not have_appimage:
+    if needs_linux_release_targets and not have_appimage:
         raise NotImplementedError("no appimage target is present")
-    if not have_gemfury:
+    if needs_linux_release_targets and not have_gemfury:
         raise NotImplementedError("no gemfury target is present")
 
 

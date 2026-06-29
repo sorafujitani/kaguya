@@ -6,6 +6,7 @@ use wezterm_dynamic::{FromDynamic, ToDynamic};
 
 mod linux;
 mod macos;
+#[cfg(windows)]
 mod windows;
 
 #[derive(Debug, Copy, Clone)]
