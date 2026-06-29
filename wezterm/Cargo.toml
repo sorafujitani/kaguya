@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Wez Furlong <wez@wezfurlong.org>"]
 edition = "2018"
 publish = false
+default-run = "kaguya"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -59,3 +60,7 @@ workspace = true
 [target.'cfg(windows)'.build-dependencies]
 cc.workspace = true
 embed-resource.workspace = true
+
+[[bin]]
+name = "kaguya"
+path = "src/main.rs"
