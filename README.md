@@ -1,40 +1,41 @@
-# Wez's Terminal
+# Kaguya
 
-<img height="128" alt="WezTerm Icon" src="https://raw.githubusercontent.com/wezterm/wezterm/main/assets/icon/wezterm-icon.svg" align="left"> *A GPU-accelerated cross-platform terminal emulator and multiplexer written by <a href="https://github.com/wez">@wez</a> and implemented in <a href="https://www.rust-lang.org/">Rust</a>*
+<img height="128" alt="WezTerm Icon" src="https://raw.githubusercontent.com/wezterm/wezterm/main/assets/icon/wezterm-icon.svg" align="left">
 
-User facing docs and guide at: https://wezterm.org/
+Kaguya is a personal fork of [WezTerm](https://github.com/wezterm/wezterm), a GPU-accelerated cross-platform terminal emulator and multiplexer written in Rust.
+
+This repository is where I experiment with custom terminal features while keeping WezTerm's strengths as the base.
+
+User-facing WezTerm documentation: https://wezterm.org/
 
 ![Screenshot](docs/screenshots/two.png)
 
 *Screenshot of wezterm on macOS, running vim*
 
-## Installation
+## About This Fork
 
-https://wezterm.org/installation
+Kaguya tracks upstream WezTerm and adds fork-specific changes over time.
 
-## Getting help
+Planned work includes:
 
-This is a spare time project, so please bear with me.  There are a couple of channels for support:
+* terminal workflows that better fit my daily environment
+* small UI and interaction improvements
+* experiments that may not belong in upstream WezTerm
 
-* You can use the [GitHub issue tracker](https://github.com/wezterm/wezterm/issues) to see if someone else has a similar issue, or to file a new one.
-* Start or join a thread in our [GitHub Discussions](https://github.com/wezterm/wezterm/discussions); if you have general
-  questions or want to chat with other wezterm users, you're welcome here!
-* There is a [Matrix room via Element.io](https://matrix.to/#/#wezterm:matrix.org)
-  for (potentially!) real time discussions.
+Fork-specific behavior will be documented here as it is added.
 
-The GitHub Discussions and Element/Gitter rooms are better suited for questions
-than bug reports, but don't be afraid to use whichever you are most comfortable
-using and we'll work it out.
+## Installation and Usage
 
-## Supporting the Project
+For now, Kaguya follows the same build, configuration, and usage model as WezTerm.
 
-If you use and like WezTerm, please consider sponsoring it: your support helps
-to cover the fees required to maintain the project and to validate the time
-spent working on it!
+Use the upstream documentation for general setup:
 
-[Read more about sponsoring](https://wezterm.org/sponsor.html).
+* Installation: https://wezterm.org/installation
+* Configuration: https://wezterm.org/config/files.html
+* Upstream repository: https://github.com/wezterm/wezterm
 
-* [![Sponsor WezTerm](https://img.shields.io/github/sponsors/wez?label=Sponsor%20WezTerm&logo=github&style=for-the-badge)](https://github.com/sponsors/wez)
-* [Patreon](https://patreon.com/WezFurlong)
-* [Ko-Fi](https://ko-fi.com/wezfurlong)
-* [Liberapay](https://liberapay.com/wez)
+## Support
+
+For general WezTerm usage, configuration, and upstream bugs, use the upstream WezTerm documentation and community channels.
+
+For Kaguya-specific changes, use this repository.
