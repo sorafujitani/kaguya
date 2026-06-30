@@ -154,7 +154,7 @@
               patchelf \
                 --add-needed "${pkgs.libGL}/lib/libEGL.so.1" \
                 --add-needed "${pkgs.vulkan-loader}/lib/libvulkan.so.1" \
-                $out/bin/wezterm-gui
+                $out/bin/kaguya-gui
             ''
             + lib.optionalString stdenv.isDarwin /* bash */ ''
               mkdir -p "$out/Applications"
@@ -165,8 +165,8 @@
               # macOS will only recognize our application bundle
               # if the binaries are inside of it. Move them there
               # and create symbolic links for them in bin/.
-              mv $out/bin/{wezterm,wezterm-mux-server,wezterm-gui,strip-ansi-escapes} "$OUT_APP"
-              ln -s "$OUT_APP"/{wezterm,wezterm-mux-server,wezterm-gui,strip-ansi-escapes} "$out/bin"
+              mv $out/bin/{kaguya,wezterm-mux-server,kaguya-gui,strip-ansi-escapes} "$OUT_APP"
+              ln -s "$OUT_APP"/{kaguya,wezterm-mux-server,kaguya-gui,strip-ansi-escapes} "$out/bin"
             '';
 
           preBuild = ''

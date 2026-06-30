@@ -67,7 +67,8 @@ pub use termwindow::{set_window_class, set_window_position, TermWindow, ICON_DAT
 
 #[derive(Debug, Parser)]
 #[command(
-    about = "Wez's Terminal Emulator\nhttp://github.com/wezterm/wezterm",
+    name = "kaguya-gui",
+    about = "Kaguya terminal emulator\nhttps://github.com/sorafujitani/kaguya",
     version = config::wezterm_version()
 )]
 struct Opt {

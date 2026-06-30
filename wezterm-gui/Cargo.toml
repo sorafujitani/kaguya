@@ -6,6 +6,7 @@ edition = "2018"
 build = "build.rs"
 resolver = "2"
 publish = false
+default-run = "kaguya-gui"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -107,3 +108,7 @@ window.workspace = true
 benchmarking.workspace = true
 env_logger.workspace = true
 k9.workspace = true
+
+[[bin]]
+name = "kaguya-gui"
+path = "src/main.rs"

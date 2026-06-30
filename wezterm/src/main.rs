@@ -23,7 +23,8 @@ mod cli;
 
 #[derive(Debug, Parser)]
 #[command(
-    about = "Wez's Terminal Emulator\nhttp://github.com/wezterm/wezterm",
+    name = "kaguya",
+    about = "Kaguya terminal emulator\nhttps://github.com/sorafujitani/kaguya",
     version = wezterm_version()
 )]
 pub struct Opt {
@@ -771,13 +772,16 @@ fn delegate_to_gui(saver: UmaskSaver) -> anyhow::Result<()> {
     // Restore the original umask
     drop(saver);
 
+    let current_exe = std::env::current_exe()?;
     let exe_name = if cfg!(windows) {
         "wezterm-gui.exe"
+    } else if current_exe.file_stem().and_then(|s| s.to_str()) == Some("kaguya") {
+        "kaguya-gui"
     } else {
         "wezterm-gui"
     };
 
-    let exe = std::env::current_exe()?
+    let exe = current_exe
         .parent()
         .ok_or_else(|| anyhow!("exe has no parent dir!?"))?
         .join(exe_name);
