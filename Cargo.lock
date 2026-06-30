@@ -819,15 +819,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c8d4a3bb8b1e0c1050499d1815f5ab16d04f0959b233085fb31653fbfc9d98f9"
 
 [[package]]
-name = "clipboard-win"
-version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e3a093d6fed558e5fe24c3dfc85a68bb68f1c824f440d3ba5aca189e2998786b"
-dependencies = [
- "winapi",
-]
-
-[[package]]
 name = "cocoa"
 version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -978,7 +969,7 @@ dependencies = [
  "shlex 1.3.0",
  "smol",
  "termwiz",
- "toml 0.8.23",
+ "toml",
  "umask",
  "wezterm-bidi",
  "wezterm-config-derive",
@@ -986,7 +977,6 @@ dependencies = [
  "wezterm-input-types",
  "wezterm-ssh",
  "wezterm-term",
- "winapi",
 ]
 
 [[package]]
@@ -1406,37 +1396,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
 
 [[package]]
-name = "dwrote"
-version = "0.11.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e1b35532432acc8b19ceed096e35dfa088d3ea037fe4f3c085f1f97f33b4d02"
-dependencies = [
- "lazy_static",
- "libc",
- "serde",
- "serde_derive",
- "winapi",
- "wio",
-]
-
-[[package]]
 name = "either"
 version = "1.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "91622ff5e7162018101f2fea40d6ebf4a78bbe5a49736a2020649edf9693679e"
-
-[[package]]
-name = "embed-resource"
-version = "1.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e62abb876c07e4754fae5c14cafa77937841f01740637e17d78dc04352f32a5e"
-dependencies = [
- "cc",
- "rustc_version",
- "toml 0.5.11",
- "vswhom",
- "winreg",
-]
 
 [[package]]
 name = "emojis"
@@ -1524,7 +1487,6 @@ dependencies = [
  "time-funcs",
  "url-funcs",
  "wezterm-version",
- "winapi",
 ]
 
 [[package]]
@@ -1711,7 +1673,6 @@ version = "0.8.3"
 dependencies = [
  "libc",
  "thiserror 1.0.69",
- "winapi",
 ]
 
 [[package]]
@@ -2233,7 +2194,7 @@ dependencies = [
  "log",
  "presser",
  "thiserror 1.0.69",
- "windows 0.58.0",
+ "windows",
 ]
 
 [[package]]
@@ -3540,7 +3501,6 @@ dependencies = [
  "mlua",
  "names",
  "nix",
- "ntapi",
  "parking_lot",
  "percent-encoding",
  "portable-pty",
@@ -3560,7 +3520,6 @@ dependencies = [
  "wezterm-dynamic",
  "wezterm-ssh",
  "wezterm-term",
- "winapi",
 ]
 
 [[package]]
@@ -3739,15 +3698,6 @@ dependencies = [
  "mio 0.8.11",
  "walkdir",
  "windows-sys 0.45.0",
-]
-
-[[package]]
-name = "ntapi"
-version = "0.4.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3b335231dfd352ffb0f8017f3b6027a4917f7df785ea2143d8af2adc66980ae"
-dependencies = [
- "winapi",
 ]
 
 [[package]]
@@ -4380,21 +4330,16 @@ name = "portable-pty"
 version = "0.9.0"
 dependencies = [
  "anyhow",
- "bitflags 1.3.2",
  "downcast-rs",
  "filedescriptor",
  "futures",
- "lazy_static",
  "libc",
  "log",
  "nix",
  "serde",
  "serial2",
- "shared_library",
  "shell-words",
  "smol",
- "winapi",
- "winreg",
 ]
 
 [[package]]
@@ -4492,9 +4437,7 @@ dependencies = [
  "libc",
  "log",
  "luahelper",
- "ntapi",
  "wezterm-dynamic",
- "winapi",
 ]
 
 [[package]]
@@ -5186,7 +5129,7 @@ dependencies = [
  "luahelper",
  "serde_json",
  "serde_yaml",
- "toml 0.8.23",
+ "toml",
  "wezterm-dynamic",
 ]
 
@@ -5349,16 +5292,6 @@ dependencies = [
  "luahelper",
  "ordered-float 4.6.0",
  "wezterm-dynamic",
-]
-
-[[package]]
-name = "shared_library"
-version = "0.1.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a9e7e0f2bfae24d8a5b5a66c5b257a83c7412304311512a0c054cd5e619da11"
-dependencies = [
- "lazy_static",
- "libc",
 ]
 
 [[package]]
@@ -5528,7 +5461,6 @@ dependencies = [
  "smol",
  "wezterm-dynamic",
  "wezterm-open-url",
- "winapi",
 ]
 
 [[package]]
@@ -5710,7 +5642,7 @@ dependencies = [
  "tar",
  "tempfile",
  "tokio",
- "toml 0.8.23",
+ "toml",
  "wezterm-dynamic",
 ]
 
@@ -5877,7 +5809,6 @@ dependencies = [
  "wezterm-escape-parser",
  "wezterm-input-types",
  "wezterm-surface",
- "winapi",
 ]
 
 [[package]]
@@ -6130,15 +6061,6 @@ dependencies = [
  "futures-sink",
  "pin-project-lite",
  "tokio",
-]
-
-[[package]]
-name = "toml"
-version = "0.5.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4f7f0dd8d50a853a531c426359045b1998f04219d88799810762cd4ad314234"
-dependencies = [
- "serde",
 ]
 
 [[package]]
@@ -6482,26 +6404,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
-name = "vswhom"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be979b7f07507105799e854203b470ff7c78a1639e330a58f183b5fea574608b"
-dependencies = [
- "libc",
- "vswhom-sys",
-]
-
-[[package]]
-name = "vswhom-sys"
-version = "0.1.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb067e4cbd1ff067d1df46c9194b5de0e98efd2810bbc95c5d5e5f25a3231150"
-dependencies = [
- "cc",
- "libc",
-]
-
-[[package]]
 name = "vtparse"
 version = "0.7.0"
 dependencies = [
@@ -6788,14 +6690,12 @@ name = "wezterm"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "cc",
  "chrono",
  "clap",
  "clap_complete",
  "clap_complete_fig",
  "codec",
  "config",
- "embed-resource",
  "env-bootstrap",
  "filedescriptor",
  "hostname",
@@ -6821,7 +6721,6 @@ dependencies = [
  "wezterm-client",
  "wezterm-gui-subcommands",
  "wezterm-term",
- "winapi",
 ]
 
 [[package]]
@@ -6908,7 +6807,6 @@ dependencies = [
  "wezterm-ssh",
  "wezterm-term",
  "wezterm-uds",
- "winapi",
 ]
 
 [[package]]
@@ -6978,7 +6876,6 @@ dependencies = [
  "wezterm-color-types",
  "wezterm-dynamic",
  "wezterm-input-types",
- "winapi",
 ]
 
 [[package]]
@@ -6991,7 +6888,6 @@ dependencies = [
  "config",
  "core-foundation 0.10.0",
  "core-text",
- "dwrote",
  "encoding_rs",
  "enum-display-derive",
  "env_logger 0.11.10",
@@ -7018,7 +6914,6 @@ dependencies = [
  "wezterm-input-types",
  "wezterm-term",
  "wezterm-toast-notification",
- "winapi",
 ]
 
 [[package]]
@@ -7029,7 +6924,6 @@ dependencies = [
  "benchmarking",
  "bitflags 1.3.2",
  "bytemuck",
- "cc",
  "chrono",
  "clap",
  "codec",
@@ -7038,7 +6932,6 @@ dependencies = [
  "dhat",
  "dirs-next",
  "downcast-rs",
- "embed-resource",
  "emojis",
  "env-bootstrap",
  "env_logger 0.11.10",
@@ -7072,7 +6965,6 @@ dependencies = [
  "regex",
  "serde",
  "serde_json",
- "shared_library",
  "shlex 1.3.0",
  "smol",
  "tabout",
@@ -7101,10 +6993,8 @@ dependencies = [
  "wezterm-term",
  "wezterm-toast-notification",
  "wgpu",
- "winapi",
  "window",
  "window-funcs",
- "windows 0.33.0",
 ]
 
 [[package]]
@@ -7131,10 +7021,8 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async_ossl",
- "cc",
  "clap",
  "config",
- "embed-resource",
  "env-bootstrap",
  "libc",
  "log",
@@ -7148,7 +7036,6 @@ dependencies = [
  "wezterm-gui-subcommands",
  "wezterm-mux-server-impl",
  "wezterm-term",
- "winapi",
 ]
 
 [[package]]
@@ -7177,15 +7064,11 @@ dependencies = [
  "wezterm-client",
  "wezterm-term",
  "wezterm-uds",
- "winapi",
 ]
 
 [[package]]
 name = "wezterm-open-url"
 version = "0.1.0"
-dependencies = [
- "winapi",
-]
 
 [[package]]
 name = "wezterm-ssh"
@@ -7293,8 +7176,6 @@ dependencies = [
  "serde",
  "uuid",
  "wezterm-open-url",
- "windows 0.33.0",
- "xml-rs",
  "zbus",
  "zvariant",
 ]
@@ -7304,7 +7185,6 @@ name = "wezterm-uds"
 version = "0.1.0"
 dependencies = [
  "async-io",
- "uds_windows",
 ]
 
 [[package]]
@@ -7443,7 +7323,7 @@ dependencies = [
  "wasm-bindgen",
  "web-sys",
  "wgpu-types",
- "windows 0.58.0",
+ "windows",
  "windows-core 0.58.0",
 ]
 
@@ -7527,7 +7407,6 @@ dependencies = [
  "bitflags 1.3.2",
  "bytes",
  "cgl",
- "clipboard-win",
  "cocoa",
  "config",
  "core-foundation 0.10.0",
@@ -7556,7 +7435,6 @@ dependencies = [
  "raw-window-handle",
  "resize",
  "serde",
- "shared_library",
  "shlex 1.3.0",
  "smithay-client-toolkit",
  "thiserror 1.0.69",
@@ -7571,9 +7449,6 @@ dependencies = [
  "wezterm-color-types",
  "wezterm-font",
  "wezterm-input-types",
- "winapi",
- "windows 0.33.0",
- "winreg",
  "x11",
  "xcb",
  "xcb-imdkit",
@@ -7591,19 +7466,6 @@ dependencies = [
  "luahelper",
  "wezterm-dynamic",
  "window",
-]
-
-[[package]]
-name = "windows"
-version = "0.33.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0128fa8e65e0616e45033d68dc0b7fbd521080b7844e5cad3a4a4d201c4b2bd2"
-dependencies = [
- "windows_aarch64_msvc 0.33.0",
- "windows_i686_gnu 0.33.0",
- "windows_i686_msvc 0.33.0",
- "windows_x86_64_gnu 0.33.0",
- "windows_x86_64_msvc 0.33.0",
 ]
 
 [[package]]
@@ -7883,12 +7745,6 @@ checksum = "a9d8416fa8b42f5c947f8482c43e7d89e73a173cead56d044f6a56104a6d1b53"
 
 [[package]]
 name = "windows_aarch64_msvc"
-version = "0.33.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd761fd3eb9ab8cc1ed81e56e567f02dd82c4c837e48ac3b2181b9ffc5060807"
-
-[[package]]
-name = "windows_aarch64_msvc"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e08e8864a60f06ef0d0ff4ba04124db8b0fb3be5776a5cd47641e942e58c4d43"
@@ -7910,12 +7766,6 @@ name = "windows_aarch64_msvc"
 version = "0.53.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b9d782e804c2f632e395708e99a94275910eb9100b2114651e04744e9b125006"
-
-[[package]]
-name = "windows_i686_gnu"
-version = "0.33.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cab0cf703a96bab2dc0c02c0fa748491294bf9b7feb27e1f4f96340f208ada0e"
 
 [[package]]
 name = "windows_i686_gnu"
@@ -7955,12 +7805,6 @@ checksum = "fa7359d10048f68ab8b09fa71c3daccfb0e9b559aed648a8f95469c27057180c"
 
 [[package]]
 name = "windows_i686_msvc"
-version = "0.33.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8cfdbe89cc9ad7ce618ba34abc34bbb6c36d99e96cae2245b7943cd75ee773d0"
-
-[[package]]
-name = "windows_i686_msvc"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "44d840b6ec649f480a41c8d80f9c65108b92d89345dd94027bfe06ac444d1060"
@@ -7982,12 +7826,6 @@ name = "windows_i686_msvc"
 version = "0.53.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1e7ac75179f18232fe9c285163565a57ef8d3c89254a30685b57d83a38d326c2"
-
-[[package]]
-name = "windows_x86_64_gnu"
-version = "0.33.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4dd9b0c0e9ece7bb22e84d70d01b71c6d6248b81a3c60d11869451b4cb24784"
 
 [[package]]
 name = "windows_x86_64_gnu"
@@ -8039,12 +7877,6 @@ checksum = "0ffa179e2d07eee8ad8f57493436566c7cc30ac536a3379fdf008f47f6bb7ae1"
 
 [[package]]
 name = "windows_x86_64_msvc"
-version = "0.33.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ff1e4aa646495048ec7f3ffddc411e1d829c026a2ec62b39da15c1055e406eaa"
-
-[[package]]
-name = "windows_x86_64_msvc"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9aec5da331524158c6d1a4ac0ab1541149c0b9505fde06423b02f5ef0106b9f0"
@@ -8086,28 +7918,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "winreg"
-version = "0.10.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "80d0f4e272c85def139476380b12f9ac60926689dd2e01d4923222f40580869d"
-dependencies = [
- "winapi",
-]
-
-[[package]]
 name = "winsafe"
 version = "0.0.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d135d17ab770252ad95e9a872d365cf3090e3be864a34ab46f48555993efc904"
-
-[[package]]
-name = "wio"
-version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d129932f4644ac2396cb456385cbf9e63b5b30c6e8dc4820bdca4eb082037a5"
-dependencies = [
- "winapi",
-]
 
 [[package]]
 name = "wit-bindgen"

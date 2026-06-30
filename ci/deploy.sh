@@ -101,33 +101,6 @@ case $OSTYPE in
     sed -e "s/@TAG@/$TAG_NAME/g" -e "s/@SHA256@/$SHA256/g" < ci/wezterm-homebrew-macos.rb.template > kaguya.rb
 
     ;;
-  msys|cygwin)
-    zipdir=WezTerm-windows-$TAG_NAME
-    if [[ "$BUILD_REASON" == "Schedule" ]] ; then
-      zipname=WezTerm-windows-nightly.zip
-      instname=WezTerm-nightly-setup
-    else
-      zipname=$zipdir.zip
-      instname=WezTerm-${TAG_NAME}-setup
-    fi
-    rm -rf $zipdir $zipname
-    mkdir $zipdir
-    cp $TARGET_DIR/release/wezterm.exe \
-      $TARGET_DIR/release/wezterm-mux-server.exe \
-      $TARGET_DIR/release/wezterm-gui.exe \
-      $TARGET_DIR/release/strip-ansi-escapes.exe \
-      $TARGET_DIR/release/wezterm.pdb \
-      assets/windows/conhost/conpty.dll \
-      assets/windows/conhost/OpenConsole.exe \
-      assets/windows/angle/libEGL.dll \
-      assets/windows/angle/libGLESv2.dll \
-      $zipdir
-    mkdir $zipdir/mesa
-    cp $TARGET_DIR/release/mesa/opengl32.dll \
-        $zipdir/mesa
-    7z a -tzip $zipname $zipdir
-    iscc.exe -DMyAppVersion=${TAG_NAME#nightly} -F${instname} ci/windows-installer.iss
-    ;;
   linux-gnu|linux)
     distro=$(lsb_release -is 2>/dev/null || sh -c "source /etc/os-release && echo \$NAME")
     distver=$(lsb_release -rs 2>/dev/null || sh -c "source /etc/os-release && echo \$VERSION_ID")
