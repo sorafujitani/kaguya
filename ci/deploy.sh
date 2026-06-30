@@ -28,7 +28,7 @@ case $OSTYPE in
     fi
     rm -rf $zipdir $zipname
     mkdir $zipdir
-    cp -r assets/macos/WezTerm.app $zipdir/Kaguya.app
+    cp -r assets/macos/Kaguya.app $zipdir/Kaguya.app
     # Omit MetalANGLE for now; it's a bit laggy compared to CGL,
     # and on M1/Big Sur, CGL is implemented in terms of Metal anyway
     rm $zipdir/Kaguya.app/*.dylib
