@@ -10,6 +10,7 @@ use std::sync::Arc;
 pub mod core_text;
 #[cfg(all(unix, not(target_os = "macos")))]
 pub mod font_config;
+#[cfg(windows)]
 pub mod gdi;
 
 #[derive(Clone, Debug, PartialEq, Eq, Ord, PartialOrd, Hash)]

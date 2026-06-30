@@ -1,5 +1,6 @@
 mod dbus;
 mod macos;
+#[cfg(windows)]
 mod windows;
 
 #[derive(Debug, Clone)]
