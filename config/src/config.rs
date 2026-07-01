@@ -398,7 +398,7 @@ pub struct Config {
     #[dynamic(default = "default_mux_output_parser_buffer_size")]
     pub mux_output_parser_buffer_size: usize,
 
-    #[dynamic(default = "default_true")]
+    #[dynamic(default = "default_mux_enable_ssh_agent")]
     pub mux_enable_ssh_agent: bool,
 
     #[dynamic(default)]
@@ -1612,6 +1612,10 @@ impl Config {
 
 fn default_check_for_updates() -> bool {
     cfg!(not(feature = "distro-defaults")) && !cfg!(target_os = "macos")
+}
+
+fn default_mux_enable_ssh_agent() -> bool {
+    !cfg!(target_os = "macos")
 }
 
 fn default_pane_select_fg_color() -> RgbaColor {
