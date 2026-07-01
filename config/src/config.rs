@@ -1611,7 +1611,7 @@ impl Config {
 }
 
 fn default_check_for_updates() -> bool {
-    cfg!(not(feature = "distro-defaults"))
+    cfg!(not(feature = "distro-defaults")) && !cfg!(target_os = "macos")
 }
 
 fn default_pane_select_fg_color() -> RgbaColor {
@@ -1879,7 +1879,7 @@ fn default_update_interval() -> u64 {
 }
 
 fn default_prefer_egl() -> bool {
-    !cfg!(windows)
+    !cfg!(windows) && !cfg!(target_os = "macos")
 }
 
 fn default_clean_exits() -> Vec<u32> {
