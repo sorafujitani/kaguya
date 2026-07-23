@@ -70,15 +70,17 @@ feature:
   to be compiled in.
 * `vendor-jetbrains-font` - causes `JetBrains Mono` to be compiled in
 * `vendor-roboto-font` - causes `Roboto` to be compiled in
-* `vendor-noto-emoji-font` - causes `Noto Color Emoji` to be compiled in.
 * `vendored-fonts` - causes all of the above `vendor-*-font` features to be enabled
+* `builtin-color-schemes` - embeds the upstream named color-scheme table
 
-Note that wezterm requires at least the following fonts to be available, either
+Note that Kaguya requires at least the following fonts to be available, either
 on the system or built-in, in its default configuration, in order to start
 correctly:
 
 * `JetBrains Mono`
 * `Roboto`
+
+Emoji falls back to the platform font (for example `Apple Color Emoji` on macOS).
 
 If there are other behaviors that you'd like to change from the default, please
 raise issue(s) for them so that we can figure out how to make it easier for you

@@ -11,9 +11,12 @@ publish = false
 [dependencies]
 async-io.workspace = true
 
-[target.'cfg(not(any(windows, target_os="macos")))'.dependencies]
+# Kaguya: prefer the system OpenSSL on every host (including macOS via
+# Homebrew). Vendoring OpenSSL dominates clean build time; use the
+# `vendored` feature when a system libssl is unavailable.
 openssl.workspace = true
 
-[target.'cfg(any(windows, target_os="macos"))'.dependencies]
-openssl = { workspace = true, features=["vendored"] }
+[features]
+default = []
+vendored = ["openssl/vendored"]
 

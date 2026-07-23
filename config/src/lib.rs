@@ -33,6 +33,7 @@ pub mod keyassignment;
 mod keys;
 pub mod lua;
 pub mod meta;
+#[cfg(feature = "builtin-color-schemes")]
 mod scheme_data;
 mod serial;
 mod ssh;
@@ -159,16 +160,23 @@ fn json_to_dynamic(value: &serde_json::Value) -> Value {
 }
 
 pub fn build_default_schemes() -> HashMap<String, Palette> {
-    let mut color_schemes = HashMap::new();
-    for (scheme_name, data) in scheme_data::SCHEMES.iter() {
-        let scheme_name = scheme_name.to_string();
-        let scheme = ColorSchemeFile::from_toml_str(data).unwrap();
-        color_schemes.insert(scheme_name, scheme.colors.clone());
-        for alias in scheme.metadata.aliases {
-            color_schemes.insert(alias, scheme.colors.clone());
-        }
+    #[cfg(not(feature = "builtin-color-schemes"))]
+    {
+        HashMap::new()
     }
-    color_schemes
+    #[cfg(feature = "builtin-color-schemes")]
+    {
+        let mut color_schemes = HashMap::new();
+        for (scheme_name, data) in scheme_data::SCHEMES.iter() {
+            let scheme_name = scheme_name.to_string();
+            let scheme = ColorSchemeFile::from_toml_str(data).unwrap();
+            color_schemes.insert(scheme_name, scheme.colors.clone());
+            for alias in scheme.metadata.aliases {
+                color_schemes.insert(alias, scheme.colors.clone());
+            }
+        }
+        color_schemes
+    }
 }
 
 struct LuaPipe {

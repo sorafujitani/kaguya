@@ -29,9 +29,9 @@ case $OSTYPE in
     rm -rf $zipdir $zipname
     mkdir $zipdir
     cp -r assets/macos/Kaguya.app $zipdir/Kaguya.app
-    # Omit MetalANGLE for now; it's a bit laggy compared to CGL,
-    # and on M1/Big Sur, CGL is implemented in terms of Metal anyway
-    rm $zipdir/Kaguya.app/*.dylib
+    # MetalANGLE dylibs are no longer shipped in the Kaguya asset tree;
+    # CGL (Metal-backed on modern macOS) is the default path.
+    rm -f $zipdir/Kaguya.app/*.dylib
     mkdir -p $zipdir/Kaguya.app/Contents/MacOS
     mkdir -p $zipdir/Kaguya.app/Contents/Resources
     cp -r assets/shell-integration/* $zipdir/Kaguya.app/Contents/Resources
