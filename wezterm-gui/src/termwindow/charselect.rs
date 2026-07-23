@@ -203,6 +203,7 @@ fn build_aliases() -> Vec<Alias> {
         }
     }
 
+    #[cfg(feature = "charselect-unicode-names")]
     for (name, value) in crate::unicode_names::NAMES {
         push(
             &mut aliases,

@@ -115,7 +115,11 @@ pub struct Mux {
     agent: Option<AgentProxy>,
 }
 
-const BUFSIZE: usize = 1024 * 1024;
+// Kaguya: keep the per-pane PTY reader buffer small. Upstream uses 1 MiB,
+// which is reserved for the lifetime of every pane (and hints the same
+// size for the socketpair buffers). 64 KiB is enough for local bursts
+// thanks to coalescing in the parse path.
+const BUFSIZE: usize = 64 * 1024;
 
 /// This function applies parsed actions to the pane and notifies any
 /// mux subscribers about the output event

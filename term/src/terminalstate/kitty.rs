@@ -44,7 +44,9 @@ impl KittyImageState {
     }
 
     fn prune_unreferenced(&mut self) {
-        let budget = 320 * 1024 * 1024; // FIXME: make this configurable
+        // Kaguya: keep terminal-image RAM bounded tightly (upstream: 320 MiB).
+        // Referenced placements are retained; unreferenced payloads are pruned.
+        let budget = 16 * 1024 * 1024;
         if self.used_memory > budget {
             let referenced: HashSet<u32> = self.placements.keys().map(|(k, _)| *k).collect();
             let target = self.used_memory - budget;

@@ -53,6 +53,7 @@ mod spawn;
 mod stats;
 mod tabbar;
 mod termwindow;
+#[cfg(feature = "charselect-unicode-names")]
 mod unicode_names;
 mod uniforms;
 mod update;

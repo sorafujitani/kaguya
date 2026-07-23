@@ -1668,7 +1668,8 @@ fn default_mux_output_parser_coalesce_delay_ms() -> u64 {
 }
 
 fn default_mux_output_parser_buffer_size() -> usize {
-    128 * 1024
+    // Kaguya: smaller parse-thread scratch buffer (upstream: 128 KiB).
+    32 * 1024
 }
 
 fn default_ratelimit_line_prefetches_per_second() -> u32 {
@@ -1694,7 +1695,9 @@ fn default_swap_backspace_and_delete() -> bool {
 }
 
 fn default_scrollback_lines() -> usize {
-    3500
+    // Kaguya: shorter default scrollback for lower per-pane RSS
+    // (upstream: 3500). Raise in config if you need deeper history.
+    1000
 }
 
 const MAX_SCROLLBACK_LINES: usize = 999_999_999;
@@ -2091,23 +2094,24 @@ impl DroppedFileQuoting {
 }
 
 fn default_glyph_cache_image_cache_size() -> usize {
-    256
+    // Kaguya lean defaults (upstream: 256 / 1024 / 1024 / 1024 / 1024).
+    64
 }
 
 fn default_shape_cache_size() -> usize {
-    1024
+    256
 }
 
 fn default_line_state_cache_size() -> usize {
-    1024
+    256
 }
 
 fn default_line_quad_cache_size() -> usize {
-    1024
+    256
 }
 
 fn default_line_to_ele_shape_cache_size() -> usize {
-    1024
+    256
 }
 
 #[derive(Debug, ToDynamic, Clone, Copy, PartialEq, Eq, Default)]

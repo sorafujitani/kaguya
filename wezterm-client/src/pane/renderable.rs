@@ -423,7 +423,12 @@ impl RenderableInner {
     }
 
     pub fn make_all_stale(&mut self) {
-        let mut lines = LruCache::unbounded();
+        // Preserve the existing capacity. Using an unbounded cache here
+        // previously allowed remote-pane line caches to grow without limit
+        // (multi-GB RSS with `wezterm connect`).
+        let mut lines = LruCache::new(
+            NonZeroUsize::new(self.lines.cap().get().max(128)).unwrap(),
+        );
         while let Some((stable_row, entry)) = self.lines.pop_lru() {
             let entry = match entry {
                 LineEntry::Stale(old) | LineEntry::Line(old) => LineEntry::Stale(old),
@@ -637,7 +642,8 @@ impl RenderableInner {
 }
 
 lazy_static::lazy_static! {
-    static ref IMAGE_LRU: Mutex<LruCache<[u8;32], Arc<ImageData>>> = Mutex::new(LruCache::new(NonZeroUsize::new(128).unwrap()));
+    // Kaguya: smaller hydrated-image LRU (upstream: 128).
+    static ref IMAGE_LRU: Mutex<LruCache<[u8;32], Arc<ImageData>>> = Mutex::new(LruCache::new(NonZeroUsize::new(32).unwrap()));
 }
 
 pub(crate) async fn hydrate_lines(

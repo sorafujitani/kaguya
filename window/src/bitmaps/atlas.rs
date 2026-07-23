@@ -8,6 +8,12 @@ use thiserror::*;
 
 const PADDING: i32 = 1;
 
+/// Kaguya: soft-cap the glyph texture atlas. On unified-memory macOS GPUs
+/// the atlas shows up in process RSS; uncapped growth can reach 4096²
+/// (~64 MiB RGBA) per window. Past this size we ask the renderer to
+/// recreate/clear instead of growing further.
+const MAX_ATLAS_SIDE: usize = 2048;
+
 #[derive(Debug, Error)]
 #[error("Texture Size exceeded, need {:?}", size)]
 pub struct OutOfTextureSpace {
@@ -116,8 +122,16 @@ impl Atlas {
             // It's not possible to satisfy that request
             let size = (reserve_width.max(reserve_height) as usize).next_power_of_two();
             metrics::histogram!("window.atlas.allocate.failure.rate").record(1.);
+            let needed = (self.side * 2).max(size).min(MAX_ATLAS_SIDE);
             Err(OutOfTextureSpace {
-                size: Some((self.side * 2).max(size)),
+                // Cap growth so a busy glyph set cannot inflate RSS without bound.
+                // When already at the cap, suggest the current size so the paint
+                // path clears/recreates instead of doubling forever.
+                size: Some(if needed > self.side {
+                    needed
+                } else {
+                    self.side
+                }),
                 current_size: self.side,
             })
         };

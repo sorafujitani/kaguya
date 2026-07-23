@@ -25,6 +25,7 @@ Kaguya tracks upstream WezTerm and optimizes for a **local macOS daily driver**:
 * **Single SSH backend** (`libssh-rs`) by default
 * **Builtin color schemes opt-in** — avoids embedding ~1000 TOML schemes (~730KB)
 * **macOS startup defaults** — update checks off, `prefer_egl` off, mux SSH agent off
+* **Low-memory defaults** — 1000-line scrollback, 64 KiB PTY buffers, smaller render caches, 16 MiB kitty image budget, 2048px atlas cap, CharSelect unicode-name dump opt-in
 * **Release profile** — thin LTO, single codegen unit, symbol strip; faster macOS incremental `dev` builds via `split-debuginfo = "unpacked"`
 
 ### Build (macOS)
@@ -41,6 +42,7 @@ Optional features:
 | Feature | Effect |
 |---|---|
 | `builtin-color-schemes` | Embed upstream's named color schemes (`-p wezterm-gui --features builtin-color-schemes`) |
+| `charselect-unicode-names` | Include the ~6MB CharSelect unicode name table |
 | `wezterm-ssh/dual-ssh-backends` | Build both `libssh-rs` and `ssh2` |
 | `wezterm-ssh/vendored-openssl` | Force vendored OpenSSL if Homebrew OpenSSL is unavailable |
 

@@ -12,11 +12,13 @@ default-run = "kaguya-gui"
 
 [features]
 # Kaguya defaults: lean daily-driver font set. Emoji comes from the OS
-# (Apple Color Emoji on macOS). Builtin color schemes are opt-in.
+# (Apple Color Emoji on macOS). Builtin color schemes and the full
+# CharSelect unicode name dump (~6MB) are opt-in to keep RSS low.
 default = ["vendored-fonts", "wayland"]
 wayland = ["window/wayland"]
 distro-defaults = ["config/distro-defaults"]
 builtin-color-schemes = ["config/builtin-color-schemes"]
+charselect-unicode-names = []
 vendor-nerd-font-symbols-font = ["wezterm-font/vendor-nerd-font-symbols"]
 vendor-jetbrains-font = ["wezterm-font/vendor-jetbrains"]
 vendor-roboto-font = ["wezterm-font/vendor-roboto"]
