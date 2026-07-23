@@ -565,11 +565,21 @@ impl FontConfigInner {
             }
         }
 
+        // Prefer bundled Roboto when present; on macOS also try the system UI
+        // font so title/UI text still looks good without embedding extra faces.
         let mut fonts = vec![if make_bold {
             bold("Roboto")
         } else {
             FontAttributes::new("Roboto")
         }];
+        #[cfg(target_os = "macos")]
+        {
+            if make_bold {
+                fonts.push(bold(".AppleSystemUIFont"));
+            } else {
+                fonts.push(FontAttributes::new(".AppleSystemUIFont"));
+            }
+        }
 
         // Fallback to their main font selection, so that we can pick up
         // any fallback fonts they might have configured in the main

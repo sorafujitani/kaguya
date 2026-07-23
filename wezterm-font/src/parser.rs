@@ -814,9 +814,9 @@ impl ParsedFont {
 }
 
 /// In case the user has a broken configuration, or no configuration,
-/// we bundle JetBrains Mono and Noto Color Emoji to act as reasonably
-/// sane fallback fonts.
-/// This function loads those.
+/// we bundle a lean set of fallback fonts (JetBrains Mono, optionally
+/// Roboto / Nerd Symbols via cargo features). Emoji is resolved from
+/// system fonts (Apple Color Emoji on macOS).
 pub(crate) fn load_built_in_fonts(font_info: &mut Vec<ParsedFont>) -> anyhow::Result<()> {
     #[allow(unused_macros)]
     macro_rules! font {
@@ -839,8 +839,6 @@ pub(crate) fn load_built_in_fonts(font_info: &mut Vec<ParsedFont>) -> anyhow::Re
             font!("../../assets/fonts/Roboto-Bold.ttf"),
             font!("../../assets/fonts/Roboto-Regular.ttf"),
         ],
-        #[cfg(any(test, feature = "vendor-noto-emoji"))]
-        &[font!("../../assets/fonts/NotoColorEmoji.ttf")],
         #[cfg(any(test, feature = "vendor-nerd-font-symbols"))]
         &[font!("../../assets/fonts/SymbolsNerdFontMono-Regular.ttf")],
     ];

@@ -10,7 +10,6 @@ publish = false
 [features]
 vendor-jetbrains = []
 vendor-roboto = []
-vendor-noto-emoji = []
 vendor-nerd-font-symbols = []
 
 [dependencies]

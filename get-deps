@@ -335,8 +335,24 @@ fallback_method() {
 
   # OSTYPE is set by bash
   case $OSTYPE in
-    darwin*|msys)
-      echo "skipping darwin*/msys"
+    darwin*)
+      # Kaguya links system OpenSSL instead of vendoring it. Prefer Homebrew.
+      if command -v brew >/dev/null 2>&1; then
+        brew list openssl@3 >/dev/null 2>&1 || brew install openssl@3
+        brew list pkgconf >/dev/null 2>&1 || brew install pkgconf
+        OPENSSL_PREFIX="$(brew --prefix openssl@3)"
+        echo "export PKG_CONFIG_PATH=\"${OPENSSL_PREFIX}/lib/pkgconfig\${PKG_CONFIG_PATH:+:\$PKG_CONFIG_PATH}\""
+        echo "export LIBRARY_PATH=\"${OPENSSL_PREFIX}/lib\${LIBRARY_PATH:+:\$LIBRARY_PATH}\""
+        echo "export CPATH=\"${OPENSSL_PREFIX}/include\${CPATH:+:\$CPATH}\""
+        export PKG_CONFIG_PATH="${OPENSSL_PREFIX}/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+        export LIBRARY_PATH="${OPENSSL_PREFIX}/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+        export CPATH="${OPENSSL_PREFIX}/include${CPATH:+:$CPATH}"
+      else
+        echo "warning: Homebrew not found; install openssl@3 or build with --features vendored-openssl" >&2
+      fi
+    ;;
+    msys)
+      echo "skipping msys (Windows support removed from Kaguya)"
     ;;
     freebsd*)
       freebsd_deps

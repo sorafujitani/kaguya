@@ -11,8 +11,12 @@ documentation = "https://docs.rs/wezterm-ssh"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-default = ["libssh-rs", "ssh2"]
-vendored-openssl = ["ssh2/vendored-openssl", "libssh-rs/vendored-openssl"]
+# Kaguya: ship a single SSH backend by default to cut compile time and
+# binary size. Enable `ssh2` (or both) if you need the alternate backend.
+default = ["libssh-rs"]
+ssh2-backend = ["ssh2"]
+dual-ssh-backends = ["libssh-rs", "ssh2"]
+vendored-openssl = ["ssh2/vendored-openssl", "libssh-rs/vendored-openssl", "async_ossl/vendored"]
 vendored-openssl-ssh2 = ["ssh2/vendored-openssl"]
 vendored-openssl-libssh-rs = ["libssh-rs/vendored-openssl"]
 

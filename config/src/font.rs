@@ -595,7 +595,11 @@ impl TextStyle {
             font.push(default_font);
         }
 
-        // We bundle this emoji font as an in-memory fallback
+        // Prefer the platform emoji font. On macOS, Apple Color Emoji is always
+        // available and avoids embedding a color-emoji TTF in the binary.
+        // Keep Noto as a secondary name for systems that ship it separately.
+        #[cfg(target_os = "macos")]
+        font.push(FontAttributes::new_fallback("Apple Color Emoji"));
         font.push(FontAttributes::new_fallback("Noto Color Emoji"));
 
         // Add symbols that many people end up using via patched fonts

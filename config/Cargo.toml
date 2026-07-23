@@ -11,7 +11,12 @@ publish = false
 env_logger.workspace = true
 
 [features]
+# Kaguya: builtin schemes are opt-in. Enabling embeds ~1000 TOML schemes
+# (~730KB) and parses them on first use. Prefer loading schemes from
+# color_scheme_dirs / config when you only need a few.
+default = []
 distro-defaults = []
+builtin-color-schemes = []
 
 [dependencies]
 anyhow.workspace = true
